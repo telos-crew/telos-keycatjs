@@ -32,7 +32,6 @@ class Keycat {
   private _account: string
 
   constructor(public config: IKeycatConfig) {
-    console.log('in Keycat constructor and config: ', config)
     this.validateBlockchain(config.blockchain)
     this._account = config.account
   }
@@ -109,7 +108,6 @@ class Keycat {
   }
 
   get keycatOrigin(): string {
-    console.log('getting keycatOrigin, this.config is: ', this.config)
     const {
       blockchain: { origin, name },
     } = this.config
