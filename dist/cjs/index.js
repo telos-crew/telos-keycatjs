@@ -108,8 +108,7 @@ var Keycat = /** @class */ (function () {
         var stringifiedArgs = JSON.stringify(args);
         var binaryStringifiedArgs = window_1.toBinary(stringifiedArgs);
         var intermediate = btoa(binaryStringifiedArgs);
-        var uriComponent = window_1.fromBinary(intermediate);
-        var encodedComponent = encodeURIComponent(uriComponent);
+        var encodedComponent = encodeURIComponent(intermediate);
         return {
             blockchain: Blockchain_1.appendPlugin(this.config.blockchain),
             account: this._account,

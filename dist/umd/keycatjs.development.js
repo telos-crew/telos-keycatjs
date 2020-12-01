@@ -136,14 +136,6 @@
         url.search = searchParams.toString();
         return url.href;
     }
-    var fromBinary = function (binary) {
-        var bytes = new Uint8Array(binary.length);
-        for (var i = 0; i < bytes.length; i++) {
-            bytes[i] = binary.charCodeAt(i);
-        }
-        // @ts-ignore
-        return String.fromCharCode.apply(String, __spread(new Uint16Array(bytes.buffer)));
-    };
     var toBinary = function (str) {
         var codeUnits = new Uint16Array(str.length);
         for (var i = 0; i < codeUnits.length; i++) {
@@ -253,8 +245,7 @@
             var stringifiedArgs = JSON.stringify(args);
             var binaryStringifiedArgs = toBinary(stringifiedArgs);
             var intermediate = btoa(binaryStringifiedArgs);
-            var uriComponent = fromBinary(intermediate);
-            var encodedComponent = encodeURIComponent(uriComponent);
+            var encodedComponent = encodeURIComponent(intermediate);
             return {
                 blockchain: appendPlugin(this.config.blockchain),
                 account: this._account,

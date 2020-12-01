@@ -1,7 +1,7 @@
 import { Deferred } from './Deferred';
 import { appendPlugin } from './Blockchain';
 import validators from './Validator';
-import { openWindow, makeWindowUrl, fromBinary, toBinary } from './utils/window';
+import { openWindow, makeWindowUrl, toBinary } from './utils/window';
 class Keycat {
     constructor(config) {
         this.config = config;
@@ -64,8 +64,7 @@ class Keycat {
         const stringifiedArgs = JSON.stringify(args);
         const binaryStringifiedArgs = toBinary(stringifiedArgs);
         const intermediate = btoa(binaryStringifiedArgs);
-        const uriComponent = fromBinary(intermediate);
-        const encodedComponent = encodeURIComponent(uriComponent);
+        const encodedComponent = encodeURIComponent(intermediate);
         return {
             blockchain: appendPlugin(this.config.blockchain),
             account: this._account,

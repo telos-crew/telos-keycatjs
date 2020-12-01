@@ -25,7 +25,7 @@ var __values = (this && this.__values) || function(o) {
 import { Deferred } from './Deferred';
 import { appendPlugin } from './Blockchain';
 import validators from './Validator';
-import { openWindow, makeWindowUrl, fromBinary, toBinary } from './utils/window';
+import { openWindow, makeWindowUrl, toBinary } from './utils/window';
 var Keycat = /** @class */ (function () {
     function Keycat(config) {
         this.config = config;
@@ -102,8 +102,7 @@ var Keycat = /** @class */ (function () {
         var stringifiedArgs = JSON.stringify(args);
         var binaryStringifiedArgs = toBinary(stringifiedArgs);
         var intermediate = btoa(binaryStringifiedArgs);
-        var uriComponent = fromBinary(intermediate);
-        var encodedComponent = encodeURIComponent(uriComponent);
+        var encodedComponent = encodeURIComponent(intermediate);
         return {
             blockchain: appendPlugin(this.config.blockchain),
             account: this._account,
