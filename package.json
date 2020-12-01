@@ -15,7 +15,7 @@
     "build:esm": "tsc --module es2015 --downlevelIteration --target es5 --outDir dist/esm",
     "build:cjs": "tsc --module commonjs --downlevelIteration --target es5 --outDir dist/cjs",
     "build:umd": "rollup dist/esm/index.js --format umd --name keycatjs --sourcemap --file dist/umd/keycatjs.development.js",
-    "build:umd:min": "cd dist/umd && uglifyjs --compress --mangle --screw-ie8 --comments -o keycatjs.production.js -- keycatjs.development.js"
+    "build:umd:min": "cd dist/umd && uglifyjs --compress --mangle --comments -o keycatjs.production.js -- keycatjs.development.js"
   },
   "repository": {
     "type": "git",
