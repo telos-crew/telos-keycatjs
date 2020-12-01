@@ -2,20 +2,20 @@ import { Deferred } from './Deferred'
 import Blockchain, { appendPlugin } from './Blockchain'
 import validators, { IBlockchainValidator } from './Validator'
 import { ISigninResponse, WindowUX } from './Types'
-import { openWindow, makeWindowUrl } from './utils/window'
+import { openWindow, makeWindowUrl, fromBinary, toBinary } from './utils/window'
 
 type IEos =
   | {
       name: typeof Blockchain.eos[number]
       nodes: string[]
       plugin?: never
-      urlOrigin: string
+      origin: string
     }
   | {
       name: string
       plugin: 'eos'
       nodes: string[]
-      urlOrigin: string
+      origin: string
     }
 
 type TBlockchain = IEos
@@ -104,25 +104,25 @@ class Keycat {
     return {
       blockchain: appendPlugin(this.config.blockchain),
       account: this._account,
-      args: encodeURIComponent(btoa(JSON.stringify(args))),
+      args: encodeURIComponent(fromBinary(btoa(toBinary(JSON.stringify(args))))),
     }
   }
 
   get keycatOrigin(): string {
-    console.log('this.config is: ', this.config)
+    console.log('getting keycatOrigin, this.config is: ', this.config)
     const {
-      __keycatOrigin,
-      blockchain: { name, urlOrigin },
+      blockchain: { origin, name },
     } = this.config
-    try {
-      const url = new URL(__keycatOrigin || name)
-      return url.origin
-    } catch (err) {
-      if (err.message.includes('Invalid URL')) {
-        return `https://${name}.keycat.co`
-      }
-      throw err
+    let telosOrigin
+    if (name === 'telos') {
+      telosOrigin = 'https://sign.telos.net'
+    } else if (name === 'telos-testnet') {
+      telosOrigin = 'https://sign-dev.telos.net'
+    } else {
+      throw new Error(`Unknown network ${name}`)
     }
+    const url = new URL(origin || telosOrigin)
+    return url.origin
   }
 
   public account(accountName: string) {
@@ -154,12 +154,11 @@ class Keycat {
 }
 
 class KeycatTelos extends Keycat {
-  constructor(nodes) {
-    console.log('in KeycatTelos constructor')
+  constructor(nodes, origin) {
     super({
       blockchain: {
         name: 'telos',
-        urlOrigin: 'https://wallet.telos.net',
+        origin,
         nodes,
       },
     })
@@ -167,12 +166,11 @@ class KeycatTelos extends Keycat {
 }
 
 class KeycatTelosTestnet extends Keycat {
-  constructor(nodes) {
-    console.log('in KeycatTelosTestnet constructor')
+  constructor(nodes, origin) {
     super({
       blockchain: {
         name: 'telos-testnet',
-        urlOrigin: 'http://localhost:3030',
+        origin,
         nodes,
       },
     })
