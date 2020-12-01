@@ -7,5 +7,5 @@ interface IUrlData {
 }
 export declare function makeWindowUrl(origin: any, path: any, data: IUrlData): string;
 export declare const fromBinary: (binary: any) => string;
-export declare const toBinary: (str: any) => string;
+export declare const toBinary: (str?: string) => string;
 export {};

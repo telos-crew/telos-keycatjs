@@ -31,7 +31,7 @@ export const fromBinary = binary => {
     // @ts-ignore
     return String.fromCharCode(...new Uint16Array(bytes.buffer));
 };
-export const toBinary = str => {
+export const toBinary = (str = '') => {
     const codeUnits = new Uint16Array(str.length);
     for (let i = 0; i < codeUnits.length; i++) {
         codeUnits[i] = str.charCodeAt(i);

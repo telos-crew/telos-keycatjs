@@ -52,6 +52,7 @@ export var fromBinary = function (binary) {
     return String.fromCharCode.apply(String, __spread(new Uint16Array(bytes.buffer)));
 };
 export var toBinary = function (str) {
+    if (str === void 0) { str = ''; }
     var codeUnits = new Uint16Array(str.length);
     for (var i = 0; i < codeUnits.length; i++) {
         codeUnits[i] = str.charCodeAt(i);

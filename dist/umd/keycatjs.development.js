@@ -137,6 +137,7 @@
         return url.href;
     }
     var toBinary = function (str) {
+        if (str === void 0) { str = ''; }
         var codeUnits = new Uint16Array(str.length);
         for (var i = 0; i < codeUnits.length; i++) {
             codeUnits[i] = str.charCodeAt(i);
