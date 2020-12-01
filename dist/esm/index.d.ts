@@ -4,12 +4,12 @@ declare type IEos = {
     name: typeof Blockchain.eos[number];
     nodes: string[];
     plugin?: never;
-    origin: string;
+    origin?: string;
 } | {
     name: string;
     plugin: 'eos';
     nodes: string[];
-    origin: string;
+    origin?: string;
 };
 declare type TBlockchain = IEos;
 interface IKeycatConfig {
@@ -38,9 +38,9 @@ declare class Keycat {
     sign: (...args: any[]) => Promise<any>;
 }
 declare class KeycatTelos extends Keycat {
-    constructor(nodes: any, origin: any);
+    constructor(nodes: any, origin?: string);
 }
 declare class KeycatTelosTestnet extends Keycat {
-    constructor(nodes: any, origin: any);
+    constructor(nodes: any, origin?: string);
 }
 export { Keycat };

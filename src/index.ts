@@ -166,7 +166,7 @@ class KeycatTelos extends Keycat {
 }
 
 class KeycatTelosTestnet extends Keycat {
-  constructor(nodes, origin: string) {
+  constructor(nodes, origin?: string) {
     super({
       blockchain: {
         name: 'telos-testnet',
