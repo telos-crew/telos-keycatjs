@@ -143,6 +143,7 @@
         for (var i = 0; i < bytes.length; i++) {
             bytes[i] = binary.charCodeAt(i);
         }
+        // @ts-ignore
         return String.fromCharCode.apply(String, __spread(new Uint16Array(bytes.buffer)));
     };
     var toBinary = function (str) {
@@ -150,6 +151,7 @@
         for (var i = 0; i < codeUnits.length; i++) {
             codeUnits[i] = str.charCodeAt(i);
         }
+        // @ts-ignore
         return String.fromCharCode.apply(String, __spread(new Uint8Array(codeUnits.buffer)));
     };
 
