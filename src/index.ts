@@ -9,13 +9,13 @@ type IEos =
       name: typeof Blockchain.eos[number]
       nodes: string[]
       plugin?: never
-      origin: string
+      origin?: string
     }
   | {
       name: string
       plugin: 'eos'
       nodes: string[]
-      origin: string
+      origin?: string
     }
 
 type TBlockchain = IEos
