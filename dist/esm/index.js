@@ -30,7 +30,6 @@ var Keycat = /** @class */ (function () {
     function Keycat(config) {
         this.config = config;
         this.sign = this.signTransaction;
-        console.log('in Keycat constructor and config: ', config);
         this.validateBlockchain(config.blockchain);
         this._account = config.account;
     }
@@ -108,7 +107,6 @@ var Keycat = /** @class */ (function () {
     };
     Object.defineProperty(Keycat.prototype, "keycatOrigin", {
         get: function () {
-            console.log('getting keycatOrigin, this.config is: ', this.config);
             var _a = this.config.blockchain, origin = _a.origin, name = _a.name;
             var telosOrigin;
             if (name === 'telos') {

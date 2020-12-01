@@ -6,7 +6,6 @@ class Keycat {
     constructor(config) {
         this.config = config;
         this.sign = this.signTransaction;
-        console.log('in Keycat constructor and config: ', config);
         this.validateBlockchain(config.blockchain);
         this._account = config.account;
     }
@@ -69,7 +68,6 @@ class Keycat {
         };
     }
     get keycatOrigin() {
-        console.log('getting keycatOrigin, this.config is: ', this.config);
         const { blockchain: { origin, name }, } = this.config;
         let telosOrigin;
         if (name === 'telos') {
