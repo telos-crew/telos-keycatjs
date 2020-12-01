@@ -100,10 +100,15 @@ class Keycat {
   }
 
   private makeUrlData(args?: any[]) {
+    const stringifiedArgs = JSON.stringify(args)
+    const binaryStringifiedArgs = toBinary(stringifiedArgs)
+    const intermediate = btoa(binaryStringifiedArgs)
+    const uriComponent = fromBinary(intermediate)
+    const encodedComponent = encodeURIComponent(uriComponent)
     return {
       blockchain: appendPlugin(this.config.blockchain),
       account: this._account,
-      args: encodeURIComponent(fromBinary(btoa(toBinary(JSON.stringify(args))))),
+      args: encodedComponent,
     }
   }
 

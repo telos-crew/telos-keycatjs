@@ -105,10 +105,15 @@ var Keycat = /** @class */ (function () {
         this.win = null;
     };
     Keycat.prototype.makeUrlData = function (args) {
+        var stringifiedArgs = JSON.stringify(args);
+        var binaryStringifiedArgs = window_1.toBinary(stringifiedArgs);
+        var intermediate = btoa(binaryStringifiedArgs);
+        var uriComponent = window_1.fromBinary(intermediate);
+        var encodedComponent = encodeURIComponent(uriComponent);
         return {
             blockchain: Blockchain_1.appendPlugin(this.config.blockchain),
             account: this._account,
-            args: encodeURIComponent(window_1.fromBinary(btoa(window_1.toBinary(JSON.stringify(args))))),
+            args: encodedComponent,
         };
     };
     Object.defineProperty(Keycat.prototype, "keycatOrigin", {
